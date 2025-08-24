@@ -3,209 +3,560 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My Portfolio</title>
+    <title>Kanak C. Dahal | Quantitative Research</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      /* Custom enhancements */
+      /* Professional color scheme */
       :root {
-        --primary-color: #5e72e4;
-        --secondary-color: #8392ab;
-        --accent-color: #2dce89;
+        --primary: #2c3e50;
+        --secondary: #34495e;
+        --accent: #3498db;
+        --light: #ecf0f1;
+        --dark: #2c3e50;
+        --success: #2ecc71;
+        --text: #2c3e50;
+        --text-light: #7f8c8d;
+        --card-bg: #ffffff;
+        --background: #f8f9fa;
       }
-      
+
+      [data-theme="dark"] {
+        --primary: #3498db;
+        --secondary: #2c3e50;
+        --accent: #2ecc71;
+        --light: #34495e;
+        --dark: #ecf0f1;
+        --success: #2ecc71;
+        --text: #ecf0f1;
+        --text-light: #bdc3c7;
+        --card-bg: #2c3e50;
+        --background: #1a2530;
+      }
+
+      body {
+        color: var(--text);
+        background-color: var(--background);
+        transition: all 0.3s ease;
+      }
+
+      /* Enhanced navigation */
+      nav.container-fluid {
+        background: var(--primary);
+        color: white;
+        padding: 1rem 0;
+        position: static;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      nav ul li strong {
+        color: white;
+        font-size: 1.4rem;
+      }
+
+      nav a {
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: white !important;
+      }
+
+      nav a[role="button"].outline {
+        border-color: white;
+        color: white !important;
+      }
+
+      nav a[role="button"].outline:hover {
+        background: white;
+        color: var(--primary) !important;
+      }
+
+      /* Hero section improvements */
       .hero {
         text-align: center;
-        padding: 4rem 1rem;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        margin-bottom: 2rem;
-        border-radius: 0 0 10px 10px;
+        padding: 5rem 1rem;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
       }
-      
-      .hero h1 {
-        font-size: 3rem;
-        margin-bottom: 0;
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,160C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+        background-size: cover;
+        background-position: center;
       }
-      
-      .hero p {
-        font-size: 1.2rem;
-        color: var(--secondary-color);
-        max-width: 600px;
-        margin: 0 auto;
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
       }
-      
+
       .profile-img {
-        width: 150px;
-        height: 150px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
         object-fit: cover;
         margin: 0 auto 1.5rem;
-        border: 5px solid white;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
       }
-      
+
+      .profile-img:hover {
+        transform: scale(1.03);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+      }
+
+      .hero p {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 600px;
+        margin: 0 auto 1.5rem;
+        font-weight: 300;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .social-links a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-3px);
+      }
+
+      /* Section styling */
       section {
-        padding: 3rem 0;
-        border-bottom: 1px solid #eee;
+        padding: 4rem 0;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
       }
-      
+
+      [data-theme="dark"] section {
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
       section:last-of-type {
         border-bottom: none;
       }
-      
+
+      hgroup h2 {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      hgroup h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      hgroup h3 {
+        color: var(--text-light);
+        font-weight: 400;
+        margin-top: 1.5rem;
+        font-size: 1.2rem;
+      }
+
+      /* Timeline improvements */
       .timeline-item {
         position: relative;
-        padding-left: 2rem;
-        margin-bottom: 2rem;
-        border-left: 2px solid var(--primary-color);
+        padding-left: 2.5rem;
+        margin-bottom: 3rem;
+        border-left: 3px solid var(--accent);
       }
-      
+
       .timeline-item:before {
         content: '';
         position: absolute;
-        left: -11px;
+        left: -14px;
         top: 0;
-        width: 20px;
-        height: 20px;
+        width: 26px;
+        height: 26px;
         border-radius: 50%;
-        background: var(--primary-color);
+        background: var(--accent);
+        border: 5px solid var(--card-bg);
+        box-shadow: 0 0 0 2px var(--accent);
       }
-      
+
       .timeline-date {
-        color: var(--secondary-color);
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        display: inline-block;
+        padding: 0.3rem 1rem;
+        background: rgba(52, 152, 219, 0.1);
+        border-radius: 20px;
+      }
+
+      .timeline-item h4 {
+        font-size: 1.4rem;
+        margin-bottom: 0.3rem;
+        color: var(--primary);
+      }
+
+      .timeline-item h5 {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        margin-bottom: 1rem;
         font-weight: 500;
+      }
+
+      /* Card enhancements */
+      .card {
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+        height: 100%;
+        background: var(--card-bg);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        border: none;
+      }
+
+      .card:hover {
+        transform: translateY(-7px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      }
+
+      .card article {
+        padding: 1.5rem;
+      }
+
+      .card h4 {
+        color: var(--primary);
+        font-size: 1.3rem;
         margin-bottom: 0.5rem;
       }
-      
-      .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        margin-bottom: 1.5rem;
-        height: 100%;
+
+      .card h5 {
+        color: var(--accent);
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
       }
-      
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      }
-      
+
       .tag {
         display: inline-block;
-        background: #f5f7fa;
-        padding: 0.25rem 0.75rem;
+        background: rgba(52, 152, 219, 0.1);
+        color: var(--accent);
+        padding: 0.4rem 1rem;
         border-radius: 50px;
         font-size: 0.8rem;
         margin: 0.25rem;
-        color: var(--secondary-color);
+        font-weight: 500;
+        transition: all 0.2s ease;
       }
-      
-      .social-links {
+
+      .tag:hover {
+        background: var(--accent);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Skill bars */
+      .skill-bar {
+        height: 10px;
+        background: rgba(0,0,0,0.1);
+        border-radius: 5px;
+        margin: 0.5rem 0 1.5rem;
+        overflow: hidden;
+      }
+
+      [data-theme="dark"] .skill-bar {
+        background: rgba(255,255,255,0.1);
+      }
+
+      .skill-progress {
+        height: 100%;
+        background: var(--accent);
+        border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-image: linear-gradient(
+          -45deg, 
+          rgba(255, 255, 255, 0.2) 25%, 
+          transparent 25%, 
+          transparent 50%, 
+          rgba(255, 255, 255, 0.2) 50%, 
+          rgba(255, 255, 255, 0.2) 75%, 
+          transparent 75%, 
+          transparent
+        );
+        z-index: 1;
+        background-size: 20px 20px;
+        animation: move 1s linear infinite;
+      }
+
+      @keyframes move {
+        0% {
+          background-position: 0 0;
+        }
+        100% {
+          background-position: 20px 0;
+        }
+      }
+
+      /* Contact section redesign */
+      #contact {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 5rem 0;
+      }
+
+      #contact h2, #contact h3 {
+        color: white;
+        text-align: center;
+      }
+
+      #contact h2::after {
+        background: white;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .contact-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease, background 0.3s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: white;
+        background: var(--accent);
+        width: 70px;
+        height: 70px;
         display: flex;
-        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 1.5rem;
+      }
+
+      .contact-card h4 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        color: white;
+      }
+
+      .contact-card p, .contact-card a {
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: block;
+      }
+
+      .contact-card a:hover {
+        color: var(--accent);
+      }
+
+      .contact-availability {
+        display: flex;
+        align-items: center;
         justify-content: center;
         margin-top: 1rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
       }
-      
-      .social-links a {
-        color: var(--secondary-color);
-        font-size: 1.5rem;
-        transition: color 0.3s ease;
+
+      .availability-dot {
+        width: 10px;
+        height: 10px;
+        background: #2ecc71;
+        border-radius: 50%;
+        margin-right: 8px;
+        animation: pulse 2s infinite;
       }
-      
-      .social-links a:hover {
-        color: var(--primary-color);
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+        }
       }
-      
+
+      /* Footer */
+      footer {
+        padding: 3rem 0;
+        text-align: center;
+        background: var(--secondary);
+        color: white;
+      }
+
+      footer .social-links {
+        margin-bottom: 1.5rem;
+      }
+
+      footer .social-links a {
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      /* Back to top button */
       .back-to-top {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background: var(--primary-color);
+        bottom: 25px;
+        right: 25px;
+        background: var(--accent);
         color: white;
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
         opacity: 0;
-        transition: opacity 0.3s ease;
+        transition: all 0.3s ease;
         z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        font-size: 1.5rem;
       }
-      
+
       .back-to-top.visible {
         opacity: 1;
       }
-      
-      .skill-bar {
-        height: 8px;
-        background: #e9ecef;
-        border-radius: 4px;
-        margin: 0.5rem 0 1.5rem;
-        overflow: hidden;
+
+      .back-to-top:hover {
+        background: var(--primary);
+        transform: translateY(-5px);
       }
-      
-      .skill-progress {
-        height: 100%;
-        background: var(--primary-color);
-        border-radius: 4px;
-      }
-      
-      /* Animation classes */
-      .fade-in {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      
+
       /* Dark mode toggle */
       .dark-mode-toggle {
         position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
+        bottom: 20px;
+        left: 20px;
+        background: var(--primary);
         color: white;
         border: none;
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         cursor: pointer;
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
       }
-      
-      /* Dark mode styles */
-      [data-theme="dark"] {
-        --primary-color: #7e95f2;
-        --secondary-color: #a8b8d8;
-        background-color: #1a1a1a;
-        color: #f5f5f5;
+
+      .dark-mode-toggle:hover {
+        transform: rotate(15deg) scale(1.1);
       }
-      
-      [data-theme="dark"] .hero {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+
+      /* Animation classes */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
       }
-      
-      [data-theme="dark"] .card {
-        background-color: #2d2d2d;
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
-      
-      [data-theme="dark"] .tag {
-        background: #4a5568;
-        color: #e2e8f0;
-      }
-      
-      [data-theme="dark"] .skill-bar {
-        background: #4a5568;
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .hero p {
+          font-size: 1.2rem;
+        }
+        
+        .profile-img {
+          width: 150px;
+          height: 150px;
+        }
+        
+        hgroup h2 {
+          font-size: 2rem;
+        }
+        
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -216,7 +567,7 @@
     <!-- Navigation -->
     <nav class="container-fluid">
       <ul>
-        <li><strong>My Portfolio</strong></li>
+        <li><strong>Kanak C. Dahal</strong></li>
       </ul>
       <ul>
         <li><a href="#about">About</a></li>
@@ -230,13 +581,15 @@
 
     <!-- Hero Section -->
     <header class="hero">
-      <img src="https://placehold.co/150x150" alt="Profile picture" class="profile-img">
-      <h1>Kanak C. Dahal</h1>
-      <p>Quantitative Research | Econophysics | Student </p>
-      <div class="social-links">
-        <a href="#" aria-label="LinkedIn">🔗</a>
-        <a href="#" aria-label="GitHub">🐱</a>
-        <a href="#" aria-label="Twitter">🐦</a>
+      <div class="hero-content">
+        <img src="C:\Users\asus\OneDrive\Desktop\Kanak\CVs\portfolio website\mainpic.jpeg" alt="Kanak C. Dahal" class="profile-img">
+        <h1>Kanak C. Dahal</h1>
+        <p>Quantitative Research | Econophysics | Student</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/kanakcd" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/Kanak-Dahal" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://qbearproject.github.io/qbear-project.github.io/" aria-label="QBear Project"><i class="fa-solid fa-chalkboard"></i></a>
+        </div>
       </div>
     </header>
 
@@ -250,33 +603,36 @@
         <div class="grid">
           <div>
             <p>
-              I'm a passionate web developer with 5+ years of experience creating beautiful, 
-              functional websites and applications. I specialize in front-end development 
-              with a focus on user experience and clean code.
+              I am a finance professional with a strong focus on quantitative research, financial modeling, and market analysis. My experience spans building valuation models (DCF, LBO), publishing research and white papers, and leading initiatives like QBear, a quant-focused research group exploring machine learning, short-selling, and systematic trading.
             </p>
             <p>
-              When I'm not coding, you can find me hiking, reading science fiction, or 
-              experimenting with new recipes in the kitchen.
+              Beyond research, I've mentored students in financial analysis, established teams for quantitative market data analysis, and worked on projects involving implied volatility surfaces, option pricing, and arbitrage dynamics.
+            </p>
+            <p>
+              I am deeply interested in the intersection of finance, technology, and data-driven decision-making, and I aim to bridge academic research with practical applications in trading and investing.
+            </p>
+            <p>
+              Outside of work, I enjoy playing football and breakdancing.
             </p>
           </div>
           <div>
             <h4>My Skills</h4>
-            <p>HTML/CSS</p>
+            <p>Data Analysis with Python/R</p>
             <div class="skill-bar">
               <div class="skill-progress" style="width: 90%"></div>
             </div>
             
-            <p>JavaScript</p>
+            <p>C++</p>
             <div class="skill-bar">
               <div class="skill-progress" style="width: 85%"></div>
             </div>
             
-            <p>UI/UX Design</p>
+            <p>Quantitative Research</p>
             <div class="skill-bar">
               <div class="skill-progress" style="width: 75%"></div>
             </div>
             
-            <p>React</p>
+            <p>Financial Modelling</p>
             <div class="skill-bar">
               <div class="skill-progress" style="width: 80%"></div>
             </div>
@@ -291,17 +647,18 @@
         </hgroup>
         
         <div class="timeline-item">
-          <span class="timeline-date">2020 - 2022</span>
-          <h4>Master of Computer Science</h4>
-          <h5>University of Technology</h5>
-          <p>Specialized in Human-Computer Interaction and Web Technologies. Graduated with honors.</p>
+          <span class="timeline-date">2023 - Pursuing</span>
+          <h4>Bachelor of Science (Hons.) in Physics</h4>
+          <h5>University of Delhi</h5>
+          <p>Courses of Study: Mathematical Physics, Statistical Mechanics and Thermodynamics, Classical and Quantum Mechanics, Electrodynamics.</p>
+          <p>Minor in Mathematics. Research on various aspects of Econophysics and Econometrics.</p>
         </div>
-        
+
         <div class="timeline-item">
-          <span class="timeline-date">2016 - 2020</span>
-          <h4>Bachelor of Science in Software Engineering</h4>
-          <h5>State University</h5>
-          <p>Coursework focused on software development methodologies, algorithms, and data structures.</p>
+          <span class="timeline-date">2020 - 2022</span>
+          <h4>Science</h4>
+          <h5>Sri Sathya Sai Higher Secondary School</h5>
+          <p>Mathematics, Physics and Chemistry. GPA: 3.68/4</p>
         </div>
       </section>
 
@@ -310,37 +667,37 @@
           <h2>Work Experience</h2>
           <h3>My professional path</h3>
         </hgroup>
-        
+
         <div class="grid">
-          <div class="card">
-            <article>
-              <h4>Senior Frontend Developer</h4>
-              <h5>TechCorp Inc.</h5>
-              <span class="timeline-date">2021 - Present</span>
-              <p>Leading a team of developers in building responsive web applications using React and TypeScript.</p>
-              <p><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Leadership</span></p>
-            </article>
-          </div>
           
-          <div class="card">
             <article>
-              <h4>Web Developer</h4>
-              <h5>Digital Solutions LLC</h5>
-              <span class="timeline-date">2019 - 2021</span>
-              <p>Developed and maintained client websites using modern JavaScript frameworks and CMS platforms.</p>
-              <p><span class="tag">JavaScript</span><span class="tag">WordPress</span><span class="tag">CSS</span></p>
+              <h4>Founder</h4>
+              <h5>theqbearproject</h5>
+              <span class="timeline-date">Jan 2025 - Forever</span>
+              <p>Founded QBear, a quant research initiative on ML and short-selling; contributed to Scholar Project on systematic trading and published white papers translating research into finance applications.</p>
+              <p><span class="tag">Research</span><span class="tag">Leadership</span><span class="tag">Quant Analysis</span></p>
             </article>
-          </div>
           
-          <div class="card">
+          
+          
             <article>
-              <h4>UI/UX Intern</h4>
-              <h5>Creative Agency</h5>
-              <span class="timeline-date">Summer 2018</span>
-              <p>Assisted in designing user interfaces and conducting usability tests for client projects.</p>
-              <p><span class="tag">Figma</span><span class="tag">User Testing</span><span class="tag">Wireframing</span></p>
+              <h4>Head of Research and Development</h4>
+              <h5>Finance and Investments Cell, ARSD</h5>
+              <span class="timeline-date">Apr. 2025 - Ongoing</span>
+              <p>Led finance projects (DCF, LBO, profiles), conducted market research, built a Quant team, and mentored students in financial analysis.</p>
+              <p><span class="tag">Leadership</span><span class="tag">Quantitative Research</span><span class="tag">Management</span></p>
             </article>
-          </div>
+          
+          
+          
+            <article>
+              <h4>Financial Analysis Intern</h4>
+              <h5>Unified Mentor</h5>
+              <span class="timeline-date">Sept. 2024 - Oct. 2024</span>
+              <p>Analysis on market trends, statistical analysis, data visualisation.</p>
+              <p><span class="tag">Python</span><span class="tag">Tableau</span><span class="tag">MySQL</span></p>
+            </article>
+          
         </div>
       </section>
 
@@ -351,41 +708,38 @@
         </hgroup>
         
         <div class="grid">
-          <div class="card">
-            <article>
-              <h4>E-commerce Platform</h4>
-              <p>A full-featured online store with shopping cart, payment processing, and admin dashboard.</p>
-              <p><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></p>
-              <footer>
-                <a href="#" role="button" class="outline">View Demo</a>
-                <a href="#" role="button" class="secondary">GitHub</a>
-              </footer>
-            </article>
-          </div>
           
-          <div class="card">
             <article>
-              <h4>Task Management App</h4>
-              <p>A drag-and-drop task management application with real-time updates and team collaboration.</p>
-              <p><span class="tag">Vue.js</span><span class="tag">Firebase</span><span class="tag">WebSockets</span></p>
-              <footer>
-                <a href="#" role="button" class="outline">View Demo</a>
-                <a href="#" role="button" class="secondary">GitHub</a>
-              </footer>
+              <h4>Implied Volatility and Forecasting</h4>
+              <p>Modeled implied volatility surfaces from option data, built smiles/skews via interpolation, and analyzed volatility dynamics for pricing efficiency and arbitrage.</p>
+              <p><span class="tag">Python</span><span class="tag">Econometrics</span><span class="tag">Time Series Forecasting</span></p>
+              <!--<footer>-->
+                <a href="https://github.com/Kanak-Dahal/ProjectPapers/blob/main/iv_surface.pdf" role="button" class="outline">View Research</a>
+              <!--</footer>-->
             </article>
-          </div>
           
-          <div class="card">
+          
+          
             <article>
-              <h4>Weather Dashboard</h4>
-              <p>Real-time weather application with 5-day forecast, location search, and interactive maps.</p>
-              <p><span class="tag">JavaScript</span><span class="tag">API</span><span class="tag">Chart.js</span></p>
-              <footer>
-                <a href="#" role="button" class="outline">View Demo</a>
-                <a href="#" role="button" class="secondary">GitHub</a>
-              </footer>
+              <h4>Modern Portfolio Theory - A practical demonstration</h4>
+              <p>Constructed a streamlit application, which incorporates the Modern Portfolio theory to find the Minimum Variance and Maximum Sharpe Ratio portfolios for Portfolio optimisation.</p>
+              <p><span class="tag">Statistics</span><span class="tag">Technical Analysis</span><span class="tag">Data Analysis</span></p>
+              <!--<footer>-->
+                <a href="https://lnkd.in/g4qcYSr3" role="button" class="outline">View Project</a>
+              <!--</footer>-->
             </article>
-          </div>
+          
+          
+          
+            <article>
+              <h4>Bridging the Markets: Examining Cross market dynamics using Neural Networks</h4>
+              <p>Examining and seeing how different markets correlate and move in accordance. Predictive modelling of Nifty 50 index using Neural Networks</p>
+              <p><span class="tag">Deep Learning</span><span class="tag">Market Dynamics</span><span class="tag">Predictive modeling</span></p>
+              <!--<footer>-->
+                <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5296210" role="button" class="outline">View Paper</a>
+              <!--</footer>-->
+            </article>
+          
         </div>
       </section>
 
@@ -396,88 +750,88 @@
         </hgroup>
         
         <div class="grid">
-          <div class="card">
-            <article>
-              <h4>Improving Web Accessibility Through AI</h4>
-              <p>Journal of Web Development, 2022</p>
-              <p>This paper explores how machine learning can be used to automatically improve website accessibility for users with disabilities.</p>
-              <footer>
-                <a href="#" role="button" class="outline">Read Paper</a>
-                <a href="#" role="button" class="secondary">Cite</a>
-              </footer>
-            </article>
-          </div>
           
-          <div class="card">
             <article>
-              <h4>User Experience Patterns in Progressive Web Apps</h4>
-              <p>International Conference on Human-Computer Interaction, 2021</p>
-              <p>An analysis of UX patterns that lead to higher engagement and conversion rates in progressive web applications.</p>
-              <footer>
+              <h4>An Implied Risk-Free Rate from Distributional and CAPM Consistency</h4>
+              <p><i>SSRN</i></p>
+              <p>The paper talks about a Quadratic model which computes the Implied Risk-Free rates of an economy based on Equity market data.</p>
+              <!--<footer>-->
                 <a href="#" role="button" class="outline">Read Paper</a>
-                <a href="#" role="button" class="secondary">Cite</a>
-              </footer>
+              <!--</footer>-->
             </article>
-          </div>
+          
+          
+          
+            <article>
+              <h4>Beyond the Bars : Ok, but why is Technical Analysis mostly bullshit ?</h4>
+              <p>Qbear's Website - August 2025</p>
+              <p>This paper talks about the reliability on the Technical Chart Patterns and their probabilities of success.</p>
+              <!--<footer>-->
+                <a href="https://qbearproject.github.io/qbear-project.github.io/techanalysispaper1.pdf" role="button" class="outline">Read Paper</a>
+              <!--</footer>-->
+            </article>
+          
         </div>
       </section>
     </main>
 
     <!-- Contact Section -->
-    <section id="contact" aria-label="Contact form" class="fade-in">
+    <section id="contact" aria-label="Contact information" class="fade-in">
       <div class="container">
-        <article>
-          <hgroup style="text-align: center;">
-            <h2>Get in Touch</h2>
-            <h3>Let's work together</h3>
-          </hgroup>
-          <form class="grid">
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              placeholder="Your Name"
-              aria-label="Your Name"
-              required
-            />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your Email"
-              aria-label="Your Email"
-              required
-            />
-            <textarea 
-              id="message" 
-              name="message" 
-              placeholder="Your Message" 
-              rows="5" 
-              required
-            ></textarea>
-            <button type="submit" onclick="event.preventDefault()">
-              Send Message
-            </button>
-          </form>
-        </article>
+        <hgroup>
+          <h2>Get in Touch</h2>
+          <h3>Let's work together</h3>
+        </hgroup>
+        
+        <div class="contact-container">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h4>Email</h4>
+            <a href="mailto:kanakprof@gmail.com">kanakprof@gmail.com</a>
+            <div class="contact-availability">
+              <div class="availability-dot"></div>
+              <span>Typically replies within 24 hours</span>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h4>Location</h4>
+            <p>University of Delhi, New Delhi, India</p>
+            <p>Open to remote collaboration</p>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <h4>Availability</h4>
+            <p>Currently available for:</p>
+            <p>Research collaborations</p>
+            <p>Project discussions</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="container" style="text-align: center; padding: 2rem 0;">
+    <footer class="container">
       <div class="social-links">
-        <a href="#">LinkedIn</a>
-        <a href="#">GitHub</a>
-        <a href="#">Google Scholar</a>
-        <a href="#">Twitter</a>
+        <a href="https://www.linkedin.com/in/kanakcd"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/Kanak-Dahal"><i class="fab fa-github"></i></a>
+        <a href="https://qbearproject.github.io/qbear-project.github.io/"><i class="fa-solid fa-chalkboard"></i></a>
       </div>
       <small>
-        &copy; 2023 My Portfolio. All rights reserved.
+        &copy; 2025 Kanak C. Dahal. All rights reserved.
       </small>
     </footer>
 
     <!-- Back to top button -->
-    <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
 
     <script>
       // Back to top button
