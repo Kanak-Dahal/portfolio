@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Portfolio</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <style>
+      /* Custom enhancements */
+      :root {
+        --primary-color: #5e72e4;
+        --secondary-color: #8392ab;
+        --accent-color: #2dce89;
+      }
+      
+      .hero {
+        text-align: center;
+        padding: 4rem 1rem;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        margin-bottom: 2rem;
+        border-radius: 0 0 10px 10px;
+      }
+      
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 0;
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+        color: var(--secondary-color);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1.5rem;
+        border: 5px solid white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      
+      section {
+        padding: 3rem 0;
+        border-bottom: 1px solid #eee;
+      }
+      
+      section:last-of-type {
+        border-bottom: none;
+      }
+      
+      .timeline-item {
+        position: relative;
+        padding-left: 2rem;
+        margin-bottom: 2rem;
+        border-left: 2px solid var(--primary-color);
+      }
+      
+      .timeline-item:before {
+        content: '';
+        position: absolute;
+        left: -11px;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary-color);
+      }
+      
+      .timeline-date {
+        color: var(--secondary-color);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+      
+      .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 1.5rem;
+        height: 100%;
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      }
+      
+      .tag {
+        display: inline-block;
+        background: #f5f7fa;
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        margin: 0.25rem;
+        color: var(--secondary-color);
+      }
+      
+      .social-links {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+      
+      .social-links a {
+        color: var(--secondary-color);
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+      }
+      
+      .social-links a:hover {
+        color: var(--primary-color);
+      }
+      
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+      
+      .back-to-top.visible {
+        opacity: 1;
+      }
+      
+      .skill-bar {
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 4px;
+        margin: 0.5rem 0 1.5rem;
+        overflow: hidden;
+      }
+      
+      .skill-progress {
+        height: 100%;
+        background: var(--primary-color);
+        border-radius: 4px;
+      }
+      
+      /* Animation classes */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      /* Dark mode toggle */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      /* Dark mode styles */
+      [data-theme="dark"] {
+        --primary-color: #7e95f2;
+        --secondary-color: #a8b8d8;
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+      }
+      
+      [data-theme="dark"] .hero {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+      }
+      
+      [data-theme="dark"] .card {
+        background-color: #2d2d2d;
+      }
+      
+      [data-theme="dark"] .tag {
+        background: #4a5568;
+        color: #e2e8f0;
+      }
+      
+      [data-theme="dark"] .skill-bar {
+        background: #4a5568;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dark mode toggle -->
+    <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+
+    <!-- Navigation -->
+    <nav class="container-fluid">
+      <ul>
+        <li><strong>My Portfolio</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#papers">Research</a></li>
+        <li><a href="#contact" role="button" class="outline">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <img src="https://placehold.co/150x150" alt="Profile picture" class="profile-img">
+      <h1>Kanak C. Dahal</h1>
+      <p>Quantitative Research | Econophysics | Student </p>
+      <div class="social-links">
+        <a href="#" aria-label="LinkedIn">🔗</a>
+        <a href="#" aria-label="GitHub">🐱</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+      <section id="about" class="fade-in">
+        <hgroup>
+          <h2>About Me</h2>
+          <h3>Get to know me better</h3>
+        </hgroup>
+        <div class="grid">
+          <div>
+            <p>
+              I'm a passionate web developer with 5+ years of experience creating beautiful, 
+              functional websites and applications. I specialize in front-end development 
+              with a focus on user experience and clean code.
+            </p>
+            <p>
+              When I'm not coding, you can find me hiking, reading science fiction, or 
+              experimenting with new recipes in the kitchen.
+            </p>
+          </div>
+          <div>
+            <h4>My Skills</h4>
+            <p>HTML/CSS</p>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 90%"></div>
+            </div>
+            
+            <p>JavaScript</p>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 85%"></div>
+            </div>
+            
+            <p>UI/UX Design</p>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 75%"></div>
+            </div>
+            
+            <p>React</p>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 80%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="fade-in">
+        <hgroup>
+          <h2>Education</h2>
+          <h3>My academic journey</h3>
+        </hgroup>
+        
+        <div class="timeline-item">
+          <span class="timeline-date">2020 - 2022</span>
+          <h4>Master of Computer Science</h4>
+          <h5>University of Technology</h5>
+          <p>Specialized in Human-Computer Interaction and Web Technologies. Graduated with honors.</p>
+        </div>
+        
+        <div class="timeline-item">
+          <span class="timeline-date">2016 - 2020</span>
+          <h4>Bachelor of Science in Software Engineering</h4>
+          <h5>State University</h5>
+          <p>Coursework focused on software development methodologies, algorithms, and data structures.</p>
+        </div>
+      </section>
+
+      <section id="work" class="fade-in">
+        <hgroup>
+          <h2>Work Experience</h2>
+          <h3>My professional path</h3>
+        </hgroup>
+        
+        <div class="grid">
+          <div class="card">
+            <article>
+              <h4>Senior Frontend Developer</h4>
+              <h5>TechCorp Inc.</h5>
+              <span class="timeline-date">2021 - Present</span>
+              <p>Leading a team of developers in building responsive web applications using React and TypeScript.</p>
+              <p><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Leadership</span></p>
+            </article>
+          </div>
+          
+          <div class="card">
+            <article>
+              <h4>Web Developer</h4>
+              <h5>Digital Solutions LLC</h5>
+              <span class="timeline-date">2019 - 2021</span>
+              <p>Developed and maintained client websites using modern JavaScript frameworks and CMS platforms.</p>
+              <p><span class="tag">JavaScript</span><span class="tag">WordPress</span><span class="tag">CSS</span></p>
+            </article>
+          </div>
+          
+          <div class="card">
+            <article>
+              <h4>UI/UX Intern</h4>
+              <h5>Creative Agency</h5>
+              <span class="timeline-date">Summer 2018</span>
+              <p>Assisted in designing user interfaces and conducting usability tests for client projects.</p>
+              <p><span class="tag">Figma</span><span class="tag">User Testing</span><span class="tag">Wireframing</span></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="fade-in">
+        <hgroup>
+          <h2>Projects</h2>
+          <h3>Things I've built or contributed to</h3>
+        </hgroup>
+        
+        <div class="grid">
+          <div class="card">
+            <article>
+              <h4>E-commerce Platform</h4>
+              <p>A full-featured online store with shopping cart, payment processing, and admin dashboard.</p>
+              <p><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">MongoDB</span></p>
+              <footer>
+                <a href="#" role="button" class="outline">View Demo</a>
+                <a href="#" role="button" class="secondary">GitHub</a>
+              </footer>
+            </article>
+          </div>
+          
+          <div class="card">
+            <article>
+              <h4>Task Management App</h4>
+              <p>A drag-and-drop task management application with real-time updates and team collaboration.</p>
+              <p><span class="tag">Vue.js</span><span class="tag">Firebase</span><span class="tag">WebSockets</span></p>
+              <footer>
+                <a href="#" role="button" class="outline">View Demo</a>
+                <a href="#" role="button" class="secondary">GitHub</a>
+              </footer>
+            </article>
+          </div>
+          
+          <div class="card">
+            <article>
+              <h4>Weather Dashboard</h4>
+              <p>Real-time weather application with 5-day forecast, location search, and interactive maps.</p>
+              <p><span class="tag">JavaScript</span><span class="tag">API</span><span class="tag">Chart.js</span></p>
+              <footer>
+                <a href="#" role="button" class="outline">View Demo</a>
+                <a href="#" role="button" class="secondary">GitHub</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="papers" class="fade-in">
+        <hgroup>
+          <h2>Research Papers</h2>
+          <h3>Academic contributions</h3>
+        </hgroup>
+        
+        <div class="grid">
+          <div class="card">
+            <article>
+              <h4>Improving Web Accessibility Through AI</h4>
+              <p>Journal of Web Development, 2022</p>
+              <p>This paper explores how machine learning can be used to automatically improve website accessibility for users with disabilities.</p>
+              <footer>
+                <a href="#" role="button" class="outline">Read Paper</a>
+                <a href="#" role="button" class="secondary">Cite</a>
+              </footer>
+            </article>
+          </div>
+          
+          <div class="card">
+            <article>
+              <h4>User Experience Patterns in Progressive Web Apps</h4>
+              <p>International Conference on Human-Computer Interaction, 2021</p>
+              <p>An analysis of UX patterns that lead to higher engagement and conversion rates in progressive web applications.</p>
+              <footer>
+                <a href="#" role="button" class="outline">Read Paper</a>
+                <a href="#" role="button" class="secondary">Cite</a>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Contact Section -->
+    <section id="contact" aria-label="Contact form" class="fade-in">
+      <div class="container">
+        <article>
+          <hgroup style="text-align: center;">
+            <h2>Get in Touch</h2>
+            <h3>Let's work together</h3>
+          </hgroup>
+          <form class="grid">
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              placeholder="Your Name"
+              aria-label="Your Name"
+              required
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your Email"
+              aria-label="Your Email"
+              required
+            />
+            <textarea 
+              id="message" 
+              name="message" 
+              placeholder="Your Message" 
+              rows="5" 
+              required
+            ></textarea>
+            <button type="submit" onclick="event.preventDefault()">
+              Send Message
+            </button>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container" style="text-align: center; padding: 2rem 0;">
+      <div class="social-links">
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Google Scholar</a>
+        <a href="#">Twitter</a>
+      </div>
+      <small>
+        &copy; 2023 My Portfolio. All rights reserved.
+      </small>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+    <script>
+      // Back to top button
+      const backToTopButton = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      
+      // Scroll animations
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      const fadeInOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -100px 0px"
+      };
+      
+      const fadeInObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, fadeInOptions);
+      
+      fadeElements.forEach(element => {
+        fadeInObserver.observe(element);
+      });
+      
+      // Dark mode toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      
+      // Check for saved theme preference or use system preference
+      const currentTheme = localStorage.getItem('theme') || 
+                           (prefersDarkScheme.matches ? 'dark' : 'light');
+      
+      if (currentTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        darkModeToggle.textContent = '☀️';
+      }
+      
+      darkModeToggle.addEventListener('click', () => {
+        let theme = 'light';
+        if (document.body.getAttribute('data-theme') !== 'dark') {
+          document.body.setAttribute('data-theme', 'dark');
+          theme = 'dark';
+          darkModeToggle.textContent = '☀️';
+        } else {
+          document.body.removeAttribute('data-theme');
+          darkModeToggle.textContent = '🌙';
+        }
+        localStorage.setItem('theme', theme);
+      });
+      
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
